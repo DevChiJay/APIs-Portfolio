@@ -1,5 +1,18 @@
 const Humor = require("../models/humor.model");
 
+
+const getAllHumors = async (req, res, next) => {
+  try {
+    const humors = await Humor.find();
+    if (!humors || humors.length === 0) {
+      return res.status(404).json({ message: "No humor entries found." });
+    }
+    return res.status(200).json({ humors });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const getRandomHumor = async (req, res, next) => {
   try {
     const humors = await Humor.find();
@@ -70,6 +83,7 @@ const removePendingHumor = async (req, res, next) => {
 };
 
 module.exports = {
+  getAllHumors,
   getRandomHumor,
   getAllNew,
   addHumor,

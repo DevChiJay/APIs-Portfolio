@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/', humorController.getAllNew);
 
+router.get('/all', humorController.getAllHumors);
+
 router.get('/random', humorController.getRandomHumor);
 
 router.post('/new/add-humor', humorController.addHumor);
